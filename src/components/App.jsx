@@ -17,8 +17,11 @@ export class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
   }
+
   isAlreadyExist(name) {
     return this.state.contacts.some(elem => elem.name === name);
   }
